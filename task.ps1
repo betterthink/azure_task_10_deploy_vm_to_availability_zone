@@ -6,8 +6,9 @@ $subnetName = "default"
 $vnetAddressPrefix = "10.0.0.0/16"
 $subnetAddressPrefix = "10.0.0.0/24"
 $sshKeyName = "linuxboxsshkey"
-$sshKeyPublicKey = Get-Content "~/.ssh/id_rsa.pub" 
-$vmName = "matebox"
+$sshKeyPublicKey = Get-Content "$HOME/.ssh/id_rsa.pub"
+$vm1Name = "matebox1"
+$vm2Name = "matebox2"
 $vmImage = "Ubuntu2204"
 $vmSize = "Standard_B1s"
 
@@ -35,12 +36,24 @@ New-AzSshKey -Name $sshKeyName -ResourceGroupName $resourceGroupName -PublicKey 
 
 New-AzVm `
 -ResourceGroupName $resourceGroupName `
--Name $vmName `
+-Name $vm1Name `
 -Location $location `
--image $vmImage `
--size $vmSize `
+-Image $vmImage `
+-Size $vmSize `
 -SubnetName $subnetName `
 -VirtualNetworkName $virtualNetworkName `
 -SecurityGroupName $networkSecurityGroupName `
--SshKeyName $sshKeyName 
+-SshKeyName $sshKeyName `
+-Zone 1
 # -PublicIpAddressName $publicIpAddressName
+New-AzVm `
+-ResourceGroupName $resourceGroupName `
+-Name $vm2Name `
+-Location $location `
+-Image $vmImage `
+-Size $vmSize `
+-SubnetName $subnetName `
+-VirtualNetworkName $virtualNetworkName `
+-SecurityGroupName $networkSecurityGroupName `
+-SshKeyName $sshKeyName `
+-Zone 2
