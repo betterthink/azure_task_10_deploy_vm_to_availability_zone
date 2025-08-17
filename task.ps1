@@ -3,9 +3,9 @@ $resourceGroupName = "mate-azure-task-10"
 $networkSecurityGroupName = "defaultnsg"
 $virtualNetworkName = "vnet"
 $subnetName = "default"
-$vnetAddressPrefix = "10.0.0.0/16"
-$subnetAddressPrefix = "10.0.0.0/24"
-# $sshKeyName = "linuxboxsshkey"
+# $vnetAddressPrefix = "10.0.0.0/16"
+# $subnetAddressPrefix = "10.0.0.0/24"
+$sshKeyName = "linuxboxsshkey"
 # $sshKeyPublicKey = Get-Content "$HOME/.ssh/id_rsa.pub"
 $vm1Name = "matebox1"
 $vm2Name = "matebox2"
@@ -20,8 +20,8 @@ $nsgRuleSSH = New-AzNetworkSecurityRuleConfig -Name SSH  -Protocol Tcp -Directio
 $nsgRuleHTTP = New-AzNetworkSecurityRuleConfig -Name HTTP  -Protocol Tcp -Direction Inbound -Priority 1002 -SourceAddressPrefix * -SourcePortRange * -DestinationAddressPrefix * -DestinationPortRange 8080 -Access Allow;
 New-AzNetworkSecurityGroup -Name $networkSecurityGroupName -ResourceGroupName $resourceGroupName -Location $location -SecurityRules $nsgRuleSSH, $nsgRuleHTTP
 
-$subnet = New-AzVirtualNetworkSubnetConfig -Name $subnetName -AddressPrefix $subnetAddressPrefix
-New-AzVirtualNetwork -Name $virtualNetworkName -ResourceGroupName $resourceGroupName -Location $location -AddressPrefix $vnetAddressPrefix -Subnet $subnet
+# $subnet = New-AzVirtualNetworkSubnetConfig -Name $subnetName -AddressPrefix $subnetAddressPrefix
+# New-AzVirtualNetwork -Name $virtualNetworkName -ResourceGroupName $resourceGroupName -Location $location -AddressPrefix $vnetAddressPrefix -Subnet $subnet
 
 #New-AzSshKey -Name $sshKeyName -ResourceGroupName $resourceGroupName -PublicKey $sshKeyPublicKey
 
